@@ -2,12 +2,23 @@ const prompt = require('prompt-sync')();
 
 
 console.log(`
-    This game was made in collaboration with Alex Jungers, Diana Wilson, John Ng, and Angel Rene.\n Please check them out on GitHub.\n
-    In the City of Light, years of prosperity and peace teetered on the edge of ruin. A new force had taken root—an extremist faction calling themselves the 'Soul Survivors.\n
-    Their doctrine was cryptic, their motives shrouded in twisted faith, but their actions spoke louder than any sermon.\n
-    Missing persons posters lined the streets, their faces now whispers in the wind. And then came the 'Darkness'—a creeping, unnatural force that wrapped itself around the city's heart,\n
-    swallowing whole districts in shadow. There was no doubt about its source. The City stands at a crossroads. The time for neutrality has passed.\n
-    It's up to you to lead determine the fate of 'Light'.\n`
+        This game was made in collaboration with: 
+    Alex Jungers, Diana Wilson, John Ng, and Angel Rene.
+        Please check them out on GitHub.
+    
+        In the City of Light, years of prosperity and peace teetered on the edge of 
+    ruin. A new force had taken root—an extremist faction calling themselves 
+    the 'Soul Survivors.
+    
+        Their doctrine was cryptic, their motives shrouded in twisted faith, 
+    but their actions spoke louder than any sermon.
+        Missing persons posters lined the streets, their faces now whispers in the 
+    wind. And then came the 'Darkness'—a creeping, unnatural force that 
+    wrapped itself around the city's heart, swallowing whole districts in shadow. 
+    
+    There was no doubt about its source. The City stands at a crossroads. 
+    The time for neutrality has passed.
+    It's up to you to lead determine the fate of 'Light'.`
 );
 
 console.log('\nWhat do you wish to be called?\n');
@@ -16,16 +27,36 @@ console.log(`\nMany warm greetings to you, ${username}! The road ahead looks har
 console.log('\nChoose your faction!\n');
 
 let charaFaction = `
-    |NETRUNNER| Masters of the digital world.\n
-    |ROGUE| Merceneries for hire.\n
-    |CORPORATE SPY| The deal makers behind the curtians.\n
-    |NOMAD| Roaming scavengers.\n
-    |MAGE| Weave spells and potions in the streets.\n
+    |NETRUNNER| Masters of the digital world.
+    |ROGUE| Merceneries for hire.
+    |CORPORATE SPY| The deal makers behind the curtians.
+    |NOMAD| Roaming scavengers.
+    |MAGE| Weave spells and potions in the streets.
 `;
 
-//figured out that we needed to put the codes below, above the switch case code in order for it to work properly on the terminal.
-console.log(charaFaction);
-const choiceFaction = prompt('Your choice: ');
+
+function firstFaction(){
+    console.log(charaFaction);
+    let choiceFaction = prompt('Your choice: ').toLowerCase().trim();
+
+    if (choiceFaction === 'spy' || choiceFaction === 'corporate spy') {
+        choiceFaction = 'corporate spy'; // Normalize 'spy' to 'corporate spy'
+    }
+    
+    while (!['netrunner', 'rogue', 'mage', 'nomad', 'corporate spy', 'spy'].includes(choiceFaction)) {
+        console.log("\nERROR 404: Access denied.");
+        console.log("The neon lights flicker in anticipation, and The Darkness is closing in on you.\n");
+        console.log("Please choose a valid faction.");
+        console.log(charaFaction);
+        choiceFaction = prompt('Your choice: ').toLowerCase();
+        
+        if (choiceFaction === 'spy' || choiceFaction === 'corporate spy') {
+            choiceFaction = 'corporate spy'; // Normalize 'spy' to 'corporate spy'
+        }    
+    }
+    return choiceFaction;
+}
+let choiceFaction = firstFaction();
 
 let chara = {
     name : `${username.toUpperCase()}`,
@@ -39,23 +70,24 @@ let chara = {
     wisdom: 10,
     charisma: 10,
     drinks: 0,
-    elixir: 100
+    elixir: 100,
+    inventory: ['elixir']
 };
 
-switch(choiceFaction.toLowerCase(choiceFaction)) {
+switch(choiceFaction) {
     case 'netrunner':
         console.log("\nYou've chosen to be a Netrunner. \nDigital realms bend to your will, but beware the dangers lurking in the code.\n");
-        chara.health = 70
-        chara.sanity = 90
-        chara.intelligence = 15
-        chara.dexterity = 12
+        chara.health = 70;
+        chara.sanity = 90;
+        chara.intelligence = 15;
+        chara.dexterity = 12;
         chara.constitution = 8;
-        
+        break;
     case 'rogue':
         console.log("\nYou've chosen to be a Rogue. \nSteel, neon, and blood — the city pays you to stay in the shadows.\n");
-        chara.dexterity = 15
-        chara.intelligence = 8
-        chara.wisdom = 12
+        chara.dexterity = 15;
+        chara.intelligence = 8;
+        chara.wisdom = 12;
         break;
     case 'mage':
         console.log("\nYou've chosen to be a Mage. \nThe magic of the old world clashes with the tech of the new. You are the bridge between the two.\n");
@@ -75,70 +107,106 @@ switch(choiceFaction.toLowerCase(choiceFaction)) {
         break;
     default:
         console.log("\nERROR 404: Access denied. \nThe neon lights flicker in aticipation and The Darkness is closing in on you.\n");
-        break;
-};
+        return firstFaction();
+}
+
+
+//figured out that we needed to put the codes below, above the switch case code in order for it to work properly on the terminal.
+
 /*tried using for else was problibatic. I needed a code that I can put multipule layers of
 user input that mean the same thing. As much as I love for else, you can also add so many things
 to each characteristic.*/
 //had to use google and chatgbt to figure out the intracacies of using switch case
-let showStats = console.log(` |NAME| ${chara.name}\n |FACTION| ${chara.faction}\n |HEALTH| ${chara.health}\n |SANITY| ${chara.sanity}\n |WISDOM| ${chara.wisdom}\n |INTELLIGENCE| ${chara.intelligence}\n |CONSTITUTION| ${chara.constitution}\n |STRENGTH| ${chara.strength}\n |DEXTERITY| ${chara.dexterity}\n |CHARISMA| ${chara.charisma}\n`);
+
+
 
 //insert faction action based choices here.//
+function showStats() {
+    console.log(`|NAME| ${chara.name}`);
+    console.log(`|FACTION| ${chara.faction}`);
+    console.log(`|HEALTH| ${chara.health}`);
+    console.log(`|SANITY| ${chara.sanity}`);
+    console.log(`|WISDOM| ${chara.wisdom}`);
+    console.log(`|INTELLIGENCE| ${chara.intelligence}`); 
+    console.log(`|CONSTITUTION| ${chara.constitution}`);
+    console.log(`|STRENGTH| ${chara.strength}`);
+    console.log(`|DEXTERITY| ${chara.dexterity}`); 
+    console.log(`|CHARISMA| ${chara.charisma}`);
+}
+
+showStats();
+
+// Act choice
+
 gameOver = false;
 
 function checkGameOver() {
     if (chara.health <= 0) {
-         console.log('As The Darkness closes in around you, your blood pools around you.') 
-        console.log('\nYou start feeling colder as time passes and every body part goes numb.') 
-        console.log('\nGAME OVER flashes before your eyes one last time before The Darkness takes over.');
+        console.log('As The Darkness closes in around you, your blood pools around you.');
+        console.log('You start feeling colder as time passes and every body part goes numb.');
+        console.log('GAME OVER flashes before your eyes one last time before The Darkness takes over.');
+        process.exit();
     } else if (chara.sanity <= 0) {
-         console.log('The Darkness has closed in around you. \nYou are no longer in control of your body.')
-         console.log('\nYou may only watch as the whispers become the screams of the people near by.')
-         console.log('\nYou can only watch as The Darkness takes over your body and tears througoh teh city you have grown to love.');
-    } else () =>
-         console.log('GAME OVER PLAYER. Turns out the game played you.');
-       
-    gameOver = true;
-    process.exit();
+        console.log('The Darkness has closed in around you. \nYou are no longer in control of your body.');
+        console.log('You may only watch as the whispers become the screams of the people near by.');
+        console.log('You can only watch as The Darkness takes over your body and tears througoh teh city you have grown to love.');
+        process.exit();
+    } else if (gameOver === true) {
+        console.log('GAME OVER PLAYER. Turns out the game played you.');
+        process.exit();
+    };
+
 };
 
-let visitBar = false;
-let home = false;
-let hideOut = false;
-let abandonedApt = false;
+visitBar = false;
+home = false;
+hideOut = false;
+abandonedApt = false;
+tip = false;
 
-let firstactChoice = `
-    |BAR|\n
-    |HOME|\n
-    |ABANDONED APARTMENT|\n
-    |KNOWN SOUL-SURVIVORS HIDE OUT|\n
+firstActChoice = `
+    |BAR|
+    |HOME|
+    |ABANDONED APARTMENT|
+    |KNOWN SOUL-SURVIVORS HIDE OUT|
 `;
+// console.log('Where would you like to start your journey?');
+// console.log(firstActChoice);
+// let nextChoice = prompt('Your choice: ');
+function choiceOne() {
+    console.log('\nWhich road ahaead do you wish to travel?');
+    
+    visitBar = false;
+    home = false;
+    hideOut = false;
+    abandonedApt = false;
+    tip = false;
+    
+    console.log(firstActChoice);
+    let actionChoice = prompt("Choose carefully: ").toLowerCase().trim();
 
-console.log('Where would you like to start your journey?');
-console.log(firstactChoice);
-let nextChoice = prompt('Your choice: ');
-
-switch (nextChoice.toLowerCase(nextChoice)) {
-    case 'bar':
-        visitBar = true
-        break;
-    case 'home':
-        home = true
-        break;
-    case 'abandoned apartment':
-        abandonedApt = true
-        break;
-    case 'soul-survivors':
-    case 'hid out':
-    case 'known hide out':
-    case 'known soul-survivors hide out':
-        hideOut = true
-        break;
-    default :
-    console.log('Invalid choice.');
-};
- 
-
+    switch (actionChoice.toLowerCase(actionChoice)) {
+        case 'bar':
+            visitBar = true;
+            break;
+        case 'home':
+            home = true;
+            break;
+        case 'abandoned apartment':
+            abandonedApt = true;
+            break;
+        case 'soul-survivors':
+        case 'hide out':
+        case 'known hide out':
+        case 'known soul-survivors hide out':
+            hideOut = true;
+            break;
+        default :
+            console.log('Invalid choice. Please choose again:');
+            actionChoice = prompt('Where to next? ').toLowerCase();
+            return choiceOne();
+    }
+}
 
 // function drinkSpending() {
 //     for (chara.drinks = 0; chara.drinks <= 3; ++ chara.drinks) {
@@ -146,52 +214,88 @@ switch (nextChoice.toLowerCase(nextChoice)) {
 //         chara.elixir -= 1;
 //     }
 // }
+choiceOne();
+
 function drinking() {
-    if (chara.drinks >= 0 && chara.drinks < 3) {
+    if (chara.drinks < 3) {
         console.log("Bartender tells you, 'Best take it slow.'\n");
         //drinkSpending()
         chara.sanity += 5;
+        chara.elixir -= 1;
         console.log(`You feel refreshed and ready to face the challenges ahead.\nGain Sanity +5: ${chara.sanity}`)
         chara.drinks += 1;
     }
-    else if (chara.drinks >= 3) {
+    else {
         console.log("\nBartender tells you, 'You're not looking too hot there.'")
         console.log("'What's the point of resistance?' you ask yourself as you keep drinking your worries at the bottom of the glass.")
         console.log("Inebrieated, you stumble out of the bar, and forget the purpose you once had.")
         console.log("---GAME OVER---");
-        gameOver = true
-        checkGameOver(gameOver = true);
+        gameOver = true;
+        checkGameOver();
     }
 }
-while (visitBar = true) {
-    console.log("\nYou're at the bar.")
-    console.log("You can: |talk| to barkeep  |drink|  |leave| bar\n")
+
+while (visitBar === true) {
+    home = false;
+    abandonedApt = false;
+    hideOut = false;
+    console.log("\nYou're at the bar.");
+    console.log("You can: |TALK| with the barkeep\n  |DRINK|  |LEAVE| the bar\n");
     barChoice = prompt("What do you do? ");
-        if (barChoice === 'talk') {
-            console.log("Bartender says important stuff to you about apt.")
+        if (barChoice.toLowerCase() === 'talk') {
+            console.log('\nBartender leans in across the narrow bar.\n He tells a story, that you only half hear over the noise of the bar.');
+            console.log('What you can make out, \nits a local ledgend about the Soul-Survivors, monsterous rituals, an abandonded\n apartment, and a conviently broken ltach on a side window. ');
+            tip = true;
         } else if (barChoice === 'drink') {
             drinking();
         } else if (barChoice === 'leave') {
-            console.log("\nYou pay your respects and leave the bar.")
-            visitChoice = true;
-            return visitBar = false;
-        } else;
+            console.log("\nYou pay your respects and leave the bar.");
+            visitBar = false;
+            choiceOne();
+            return;
+        }
 }
 // Make sure to make edit to 'chara' object by including 'drinks as a value/parameter. DONE TYYYY JOHN!
-while (home = true) {
-    console.log('Congrats, you decided to go back to your stuffy apartment and leave the city to ruins.');
-    checkGameOver(gameOver = true);
-};
-while (hideOut = true) {
-    console.log("You walk right up to the front doors.\n A big burly man is there. He ask for your access card.\n You do not have one and get punched for disturbing the man's night.\n")
+
+while (home === true) {
+    console.log('Congrats, you decided to go back to your stuffy apartment and leave the city to ruins.\n');
+    gameOver = true; //have to add this or you end up in an infinate loop. It's kinda terrifying.
     checkGameOver();
 };
-while (abandonedApt = true );
+
+while (hideOut === true) {
+    if (chara.inventory === 'keycard') {
+        console.log('This is still being built out. Stay alive and stay tuned.');
+    } else {
+        console.log("You walk right up to the front doors\n.A big burly man is there. He asks for your access card.\nYou do not have one and get punched for disturbing the man's night.\n");
+        chara.health -= 10
+        chara.sanity -= 5
+        console.log(`You loose 10 health and 5 sanity. Here's how much you have left:\n |HEALTH| ${chara.health}\n |SANITY| ${chara.sanity} `);
+        checkGameOver();
+        choiceOne(); //infinate loops will infinately give me nightmares.
+    }
+};
+
+while (abandonedApt) {
+    if (tip === true) {
+        console.log('This is still being built out. Stay alive and stay tuned.');
+        //add the 3 apartment floors// add battle in the basement
+    } else {
+        console.log('Nothing really interesting to see here,\n except a couple of yummy spiders.');
+        choiceOne();
+    }
+}
+
 console.log("This is part of an going project. Stay alive and stay tuned for more coming soon...");
 
-//add a choice options of where the player wants to start thier journey.
-//  Home->   game over
-//  Soul-Surviors hide out-> console.log('You walk right up to the front doors. A big burly man is there. He ask for your access card. You do not have one and get punched for disturbing the man's night.')
-//  abandoned apartment-> 
-//  bar-> do you want to talk to the bartender? yes -> first interaction console.log('The bartender gives you a tip about an abandoned aparment nearby.') other interactions console.log('Bartender asks if you would like a drink.')
-//          no -> console.log('You get lost in the noisy bar and eventually wander outside.\n Your head starts to go fuzzy from the smells of the ally way and you quickly loose concious.\n You have been captured.') Game Over
+//add a function for spending elixir and adding to inventory.
+/*for adding inventory items:
+
+chara.inventory.push("Healing Potion");
+chara.inventory.push("Key Card");
+
+console.log("Your inventory includes: ");
+chara.inventory.forEach(item => console.log(item));
+
+
+add a choice options of where the player wants to start thier journey.*/
