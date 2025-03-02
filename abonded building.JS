@@ -160,3 +160,158 @@ if (secondChoice === "1") {
     console.log("\nInvalid choice. The darkness claims you.\nGAME OVER.\n");
     process.exit();
 }
+
+// Version 2.0
+
+const prompt = require('prompt-sync')();
+
+console.log("You arrive at an abandoned building. The first floor windows are covered with posters, some of which say 'Arcanium'. The posters are old and faded, depicting cryptic symbols, strange alchemical schemes, and disturbing slogans like 'Trade your soul for knowledge' and 'The door will open for the worthy'. Some of them are torn at the edges, the paper curling from age, while others seem to have been recently disturbed, as if someone had been carefully inspecting them. The air is thick with dust, faintly smelling of metal, and a disturbing silence hangs over it, occasionally broken by distant creaks from behind the walls. The floor underfoot is fragile, each step raising a cloud of dust. Old shelves along the walls are empty, but faint outlines of objects that once stood on them remain. A rusty lantern hangs from the ceiling, swaying slightly, as if touched by an invisible hand. In the dim light, something moves — a shadow barely noticeable at the edge of your vision. Your curiosity to explore the place grows stronger, untamed.\n");
+
+console.log("For a moment, you wonder what 'Arcanium' really is. Was it a secret society? A black market for forbidden artifacts? You feel an irresistible desire to learn more, to enter its secrets — maybe not today, but soon.\n");
+
+console.log("What will you do?\n");
+console.log("1. Inspect the building again\n2. Leave\n3. Enter inside\n");
+let choice = prompt("Your choice: ");
+if (choice === "1") {
+    console.log("\nYou carefully inspect the building. The architecture is old but sturdy. Graffiti covers parts of the walls, some in an unknown language. A worn sign says 'No entry'.\n");
+} else if (choice === "2") {
+    console.log("\nYou decide this place isn't worth the risk and leave. Maybe another time...\n");
+    process.exit();
+} else if (choice === "3") {
+    console.log("\nYou push the door open, and it creaks. Inside, the first floor is dimly lit. The floors are covered with dirt, ash, and remnants of a battle. Old blood stains the places where tables and chairs once stood. In the corner, signs of destruction: metallic parts, broken pieces of some device, and burn marks on the walls. Wires hang from the ceiling, sparking and trembling from overload, while dark water stains form from broken pipes, adding to the feeling of dampness and cold. The air is thick with a suffocating silence, occasionally disturbed by distant glass breaking or random rustling — a sound as though something or someone is still here. The fabric of the tents and sheets hanging from the ceiling is deeply dented, their edges torn as though from a fight. The weathered walls show signs of those who once hid in this place.\n");
+
+    console.log("You feel the cold permeating your very being. The damp, ruined walls seem frozen, and the air feels thick and sticky with moisture. The ground beneath you crunches with dry, musty dust, and the squeaking floorboards are fragile and brittle. Everything feels as if time has stopped here, and no one has been here for years, yet you sense it hides dark secrets.\n");
+} else {
+    console.log("\nInvalid choice. Please try again.\n");
+    process.exit();
+}
+
+console.log("Where will you go?\n");
+console.log("1. Go upstairs to the second floor\n2. Enter the boss's office\n3. Go down to the basement\n");
+let secondChoice = prompt("Your choice: ");
+if (secondChoice === "1") {
+    console.log("\nYou head upstairs and find massive metal doors resembling a high-tech laboratory's entry. They're locked. You'll need a key or your hacker's help.\n");
+    console.log("Choice: Go back | Try to open them with dark force\n");
+    let labChoice = prompt("Your choice: ").toLowerCase();
+    if (labChoice.includes("dark")) {
+        console.log("\nYou try to open the doors with your dark powers, but the energy backlash strips you of some of your humanity. You're not strong enough yet.\nGAME OVER.\n");
+        process.exit();
+    } else {
+        console.log("\nYou decide to head back downstairs.\n");
+    }
+} else if (secondChoice === "2") {
+    console.log("\nIn the boss's office, the walls are made of smooth chrome panels adorned with neon lights that pulse in rhythmic patterns. The air smells faintly of burnt wiring and ozone. Monitors flicker with static on the walls, emitting an eerie light. Strange symbols, like a mix of ancient alchemy and futuristic technologies, are burned into the metallic surfaces, while holographic screens hover just above the floor, displaying unreadable streams of data.\n");
+    console.log("In the center of the room, a large holographic map of the city hovers, with red dots marking important places. The hum of high-tech machines fills the air, blending with occasional electric sparks. In the corner, a desk is cluttered with cybernetic limbs, wires, and strange mechanical devices. The atmosphere is cold and sterile, as if technology and something far darker are intertwined.\n");
+    console.log("Choice: Go back | Investigate the desk\n");
+    let bossChoice = prompt("Your choice: ").toLowerCase();
+    if (bossChoice.includes("investigate")) {
+        console.log("\nYou approach the desk, and a faint hissing sound emerges from the pile of unfinished projects. There lies a curved cybernetic arm that seems to twitch, as if it's still alive.\n");
+        console.log("You notice a strange device in the center of the desk — half technological, half organic — its purpose unclear. When you touch it, the lights in the room start flickering, and a voice, mechanical but strangely human, speaks in your mind.\n");
+        console.log("Suddenly, movement in the shadows draws your attention. Something is moving, something you can't fully comprehend.\n");
+    } else {
+        console.log("\nYou decide to leave the boss's office and return to the main hall.\n");
+    }
+} else if (secondChoice === "3") {
+    console.log("\nThe basement is dark. Somewhere in the distance, a mechanical grinding sound can be heard. You realize too late — the figure you saw earlier wasn't trying to escape... it was leading you here.\n");
+    console.log("Choice: Try to run | Hide | Prepare for a fight\n");
+    let basementChoice = prompt("Your choice: ").toLowerCase();
+    if (basementChoice.includes("run")) {
+        console.log("\nAs you turn to run, the darkness engulfs you. You didn't make it out.\nGAME OVER.\n");
+        process.exit();
+    } else if (basementChoice.includes("hide")) {
+        console.log("\nYou press yourself against the cold stone wall, holding your breath. Something passes by you, not noticing.\n");
+    } else if (basementChoice.includes("fight")) {
+        console.log("\nYou grip your weapon tightly, your heart racing, preparing for whatever lurks in the dark. And then, in the dim light filtering through the basement doors, you see it.\n");
+        console.log("A massive serpent-like creature writhes in the darkness. Its body is covered in human hands, each unnaturally attached to its scaly skin. The hands twitch and grasp at the air, fingers bending as if trying to seize your soul. Its movements make the ground beneath you tremble, and its eyes — dark and unblinking — seem to penetrate your being, as though it knows your deepest fears.\n");
+        console.log("Its fangs gleam with venom, and its long tail hisses through the air menacingly. When it opens its mouth, a sinister hissing sound emanates, full of unnatural whispers in a language that warps your mind.\n");
+
+        // Combat mechanics
+        let playerHealth = 100;
+        let monsterHealth = 200;
+        let monsterAttack = 25;
+        let strongHitDamage = 60; // Strong hit to the creature's heart
+        let playerAttackDamage = 30;
+        let playerDefense = 10;
+
+        while (monsterHealth > 0 && playerHealth > 0) {
+            console.log(`\nYour health: ${playerHealth} | Monster's health: ${monsterHealth}`);
+            console.log("Choice: Attack | Dodge | Use magic");
+            let fightChoice = prompt("Your choice: ").toLowerCase();
+
+            if (fightChoice.includes("attack")) {
+                console.log("\nYou rush at the creature and strike!\n");
+                let damage = (Math.random() < 0.2) ? strongHitDamage : playerAttackDamage; // 20% chance for a strong hit to the creature's heart
+                monsterHealth -= damage;
+                console.log(`You dealt ${damage} damage to the monster.`);
+                if (damage === strongHitDamage) {
+                    console.log("\nYou strike right in the heart of the creature, making it writhe in pain, its hands jerking around chaotically.\n");
+                }
+            } else if (fightChoice.includes("dodge")) {
+                console.log("\nYou quickly dodge the monster's attack.\n");
+                playerHealth -= monsterAttack - playerDefense;
+                console.log("You take partial damage from the monster's attack, but most of it was avoided.");
+            } else if (fightChoice.includes("magic")) {
+                console.log("\nYou cast a spell, hoping to weaken the monster.\n");
+                let magicDamage = Math.floor(Math.random() * 40) + 10; // Magic damage between 10 and 50
+                monsterHealth -= magicDamage;
+                console.log(`Your magical attack dealt ${magicDamage} damage to the monster.`);
+            } else {
+                console.log("\nInvalid choice. The monster attacks you!\n");
+                playerHealth -= monsterAttack;
+            }
+
+            if (monsterHealth > 0) {
+                console.log("\nThe creature attacks!\n");
+                playerHealth -= monsterAttack;
+                console.log(`The creature's tail tear into you dealing ${monsterAttack} damage.`);
+            }
+        }
+
+        if (playerHealth <= 0) {
+            console.log("\nYou were defeated. GAME OVER.\n");
+        } else {
+            console.log("\nYou defeated the serpent-like creature!\n");
+            // New choices after the victory
+            console.log("\nYou stand victorious over the fallen creature, its hands still twitching after death.\n");
+            console.log("Choice: Investigate the basement | Run | Take the bottle of unknown drink");
+            let nextChoice = prompt("Your choice: ").toLowerCase();
+
+            if (nextChoice.includes("investigate")) {
+                console.log("\nAs you investigate the first floor again, you hear the distinct sound of a police drone approaching from afar. The air fills with the sound of distant engines.\n");
+                console.log("With a feeling of dread, you realize the building is no longer safe. You decide to leave quickly before you're caught.\n");
+                process.exit();
+            } else if (nextChoice.includes("run")) {
+                console.log("\nYou decide to leave the building, knowing you've gained knowledge and experience.\n");
+                process.exit();
+            } else if (nextChoice.includes("drink")) {
+                console.log("\nYou take the bottle of unknown drink. It seems strange, and it might contain something dangerous.\n");
+            }
+
+            // Now the player can try extracting the crystal
+            console.log("\nYou decide to leave the building and try extracting the crystal from the creature's chest.\n");
+
+            let extractionSuccess = Math.random() < 0.5; // 50% chance to successfully extract the crystal
+            if (extractionSuccess) {
+                console.log("\nYou manage to carefully extract the crystal from the creature's chest. It pulses with dark energy, and you feel strange power coursing through your fingers.\n");
+            } else {
+                console.log("\nYou can't extract the crystal. The creature's chest is too damaged, and the crystal is firmly lodged inside.\n");
+            }
+
+            // Then the player will be offered to choose whether to leave or explore the first floor again
+            console.log("\nChoice: Leave the building | Investigate the first floor again");
+            let finalChoice = prompt("Your choice: ").toLowerCase();
+            if (finalChoice.includes("investigate")) {
+                console.log("\nAs you investigate the first floor again, you hear the distinct sound of a police drone approaching from afar. The air fills with the sound of distant engines.\n");
+                console.log("With a feeling of dread, you realize the building is no longer safe. You decide to leave quickly before you're caught.\n");
+                process.exit();
+            } else {
+                console.log("\nYou decide to leave the building, knowing you've gone far enough.\n");
+                process.exit();
+            }
+        }
+    }
+} else {
+    console.log("\nInvalid choice. Darkness consumes you.\nGAME OVER.\n");
+    process.exit();
+}
+
