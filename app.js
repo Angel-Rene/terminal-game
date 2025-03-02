@@ -71,7 +71,7 @@ let chara = {
     charisma: 10,
     drinks: 0,
     elixir: 100,
-    inventory: []
+    inventory: ['elixir']
 };
 
 switch(choiceFaction) {
