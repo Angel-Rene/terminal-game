@@ -175,7 +175,7 @@ function checkGameOver() {
 // }
 
 let location = {
-    Bar: false,
+    bar: false,
     home: false,
     hideOut: false,
     abandonedApt: false
@@ -183,49 +183,56 @@ let location = {
 
 tip = false;
 
-let firstActChoice = [
-    '1|BAR|',
-    '2|HOME|',
-    '3|ABANDONED APARTMENT|',
-    '4|KNOWN SOUL-SURVIVORS HIDE OUT|',
-];
-// console.log('Where would you like to start your journey?');
-// console.log(firstActChoice);
-// let nextChoice = prompt('Your choice: ');
-function travel() {
-    console.log('As you enter the city of Light. The civilians need a hero');
-    console.log('\nWhich road ahead do you wish to travel?');
+travel() {
+   console.log(`\nWhere would you like to go?`);
+    console.log(`1|BAR|`);
+    console.log(`2|HOME|`);
+    console.log(`3|ABANDONED APARTMENT|`)
+    console.log(`4|KNOWN SOUL-SURVIVORS HIDE OUT|`)
+
+    let choice = prompt()
+    // console.log('Where would you like to start your journey?');
+    // console.log(firstActChoice);
+    // let nextChoice = prompt('Your choice: ');
+
+    //thank you alex and chat gbt for this function
+    // console.log('\nAs you enter the city of Light. The civilians need a hero');
+    // console.log('\nWhich road ahead do you wish to travel?');
+    
+    // console.log('1|BAR| 2|HOME|
+    // 3|ABANDONED APARTMENT|
+    // 4|KNOWN SOUL-SURVIVORS HIDE OUT|')
+
+
+
     let location = {
-        Bar: false,
+        bar: false,
         home: false,
         hideOut: false,
         abandonedApt: false
     };
-
-    firstActChoice.forEach(choice => {
-        console.log(choice);
-    });
     
-    locationChoice = prompt("\nChoose a number carefully: ");
+    console.log(firstActChoice)
+    locationChoice = prompt("\nChoose a number carefully: ").trim();
 
-    switch (locationChoice) {
-        case '1':
-            location.Bar = true;
-            break;
-        case '2':
-            location.home = true;
-            break;
-        case '3':
-            location.abandonedApt = true;
-            break;
-        case '4':
-            location.hideOut = true;
-            break;
-        default :
-            console.log('Invalid choice. Please choose again:');
-            actionChoice = prompt('Where to next? ').toLowerCase();
-            return travel();
-    }
+    // switch (locationChoice) {
+    //     case "1" :
+    //         location.bar = true;
+    //         break;
+    //     case "2" :
+    //         location.home = true;
+    //         break;
+    //     case "3" :
+    //         location.abandonedApt = true;
+    //         break;
+    //     case "4" :
+    //         location.hideOut = true;
+    //         break;
+    //     default :
+    //         console.log('Invalid choice. Please choose again:');
+    //         actionChoice = prompt('Where to next? ').toLowerCase();
+    //         return travel();
+    // }
 }
 
 // function drinkSpending() {
@@ -255,7 +262,7 @@ function drinking() {
     }
 }
 
-while (location.Bar === true) {
+while (location.bar === true) {
     home = false;
     abandonedApt = false;
     hideOut = false;
