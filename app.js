@@ -71,7 +71,7 @@ let chara = {
     charisma: 10,
     drinks: 0,
     elixir: 100,
-    inventory: []
+    inventory: ['elixir'],
 };
 
 switch(choiceFaction) {
@@ -156,55 +156,75 @@ function checkGameOver() {
         process.exit();
     };
 
+}
+
+// function addLocation(locationName) {
+//     // Check if the location already exists
+//     if (!location[locationName]) {
+//         location[locationName] = false;  // Add new location as false so that it is not visited.
+//         console.log(`${locationName} added to locations.`);
+//     } else {
+//         console.log(`${locationName} already exists.`);
+//     }
+// }
+
+// function addItemToInventory(item) {
+//     chara.inventory.push(item);
+//     console.log(`${item} added to your inventory.`);
+//     chara.inventory.forEach(item => console.log(item))
+// }
+
+let location = {
+    Bar: false,
+    home: false,
+    hideOut: false,
+    abandonedApt: false
 };
 
-visitBar = false;
-home = false;
-hideOut = false;
-abandonedApt = false;
 tip = false;
 
-firstActChoice = `
-    |BAR|
-    |HOME|
-    |ABANDONED APARTMENT|
-    |KNOWN SOUL-SURVIVORS HIDE OUT|
-`;
+let firstActChoice = [
+    '1|BAR|',
+    '2|HOME|',
+    '3|ABANDONED APARTMENT|',
+    '4|KNOWN SOUL-SURVIVORS HIDE OUT|',
+];
 // console.log('Where would you like to start your journey?');
 // console.log(firstActChoice);
 // let nextChoice = prompt('Your choice: ');
-function choiceOne() {
-    console.log('\nWhich road ahaead do you wish to travel?');
-    
-    visitBar = false;
-    home = false;
-    hideOut = false;
-    abandonedApt = false;
-    tip = false;
-    
-    console.log(firstActChoice);
-    let actionChoice = prompt("Choose carefully: ").toLowerCase().trim();
+function travel() {
+    console.log('As you enter the city of Light. The civilians need a hero');
+    console.log('\nWhich road ahead do you wish to travel?');
+    let location = {
+        Bar: false,
+        home: false,
+        hideOut: false,
+        abandonedApt: false
+    };
 
-    switch (actionChoice.toLowerCase(actionChoice)) {
-        case 'bar':
-            visitBar = true;
+    firstActChoice.forEach(choice => {
+        console.log(choice);
+    });
+    
+    locationChoice = prompt("\nChoose a number carefully: ");
+
+    switch (locationChoice) {
+        case '1':
+            location.Bar = true;
             break;
-        case 'home':
-            home = true;
+        case '2':
+            location.home = true;
             break;
-        case 'abandoned apartment':
-            abandonedApt = true;
+        case '3':
+            location.abandonedApt = true;
             break;
-        case 'soul-survivors':
-        case 'hide out':
-        case 'known hide out':
-        case 'known soul-survivors hide out':
-            hideOut = true;
+        case '4':
+            location.hideOut = true;
             break;
         default :
             console.log('Invalid choice. Please choose again:');
             actionChoice = prompt('Where to next? ').toLowerCase();
-            return choiceOne();
+            return travel();
     }
 }
 
@@ -214,7 +234,7 @@ function choiceOne() {
 //         chara.elixir -= 1;
 //     }
 // }
-choiceOne();
+travel();
 
 function drinking() {
     if (chara.drinks < 3) {
@@ -235,14 +255,14 @@ function drinking() {
     }
 }
 
-while (visitBar === true) {
+while (location.Bar === true) {
     home = false;
     abandonedApt = false;
     hideOut = false;
     console.log("\nYou're at the bar.");
     console.log("You can: |TALK| with the barkeep\n  |DRINK|  |LEAVE| the bar\n");
-    barChoice = prompt("What do you do? ");
-        if (barChoice.toLowerCase() === 'talk') {
+    barChoice = prompt("What do you do? ").toLowerCase();
+        if (barChoice === 'talk') {
             console.log('\nBartender leans in across the narrow bar.\n He tells a story, that you only half hear over the noise of the bar.');
             console.log('What you can make out, \nits a local ledgend about the Soul-Survivors, monsterous rituals, an abandonded\n apartment, and a conviently broken ltach on a side window. ');
             tip = true;
@@ -251,38 +271,39 @@ while (visitBar === true) {
         } else if (barChoice === 'leave') {
             console.log("\nYou pay your respects and leave the bar.");
             visitBar = false;
-            choiceOne();
+            travel();
             return;
         }
 }
 // Make sure to make edit to 'chara' object by including 'drinks as a value/parameter. DONE TYYYY JOHN!
 
-while (home === true) {
+while (location.home === true) {
     console.log('Congrats, you decided to go back to your stuffy apartment and leave the city to ruins.\n');
     gameOver = true; //have to add this or you end up in an infinate loop. It's kinda terrifying.
     checkGameOver();
 };
 
-while (hideOut === true) {
+while (location.hideOut === true) {
     if (chara.inventory === 'keycard') {
         console.log('This is still being built out. Stay alive and stay tuned.');
+        //please look into abandoned apartment first.
     } else {
         console.log("You walk right up to the front doors\n.A big burly man is there. He asks for your access card.\nYou do not have one and get punched for disturbing the man's night.\n");
         chara.health -= 10
         chara.sanity -= 5
         console.log(`You loose 10 health and 5 sanity. Here's how much you have left:\n |HEALTH| ${chara.health}\n |SANITY| ${chara.sanity} `);
         checkGameOver();
-        choiceOne(); //infinate loops will infinately give me nightmares.
+        travel(); //infinate loops will infinately give me nightmares.
     }
 };
 
-while (abandonedApt) {
+while (location.abandonedApt === true) {
     if (tip === true) {
         console.log('This is still being built out. Stay alive and stay tuned.');
         //add the 3 apartment floors// add battle in the basement
     } else {
         console.log('Nothing really interesting to see here,\n except a couple of yummy spiders.');
-        choiceOne();
+        travel();
     }
 }
 
@@ -297,5 +318,18 @@ chara.inventory.push("Key Card");
 console.log("Your inventory includes: ");
 chara.inventory.forEach(item => console.log(item));
 
+function addLocation(locationName) {
+    // Check if the location already exists
+    if (!location[locationName]) {
+        location[locationName] = false;  // Add new location as false (not visited)
+        console.log(`${locationName} added to locations.`);
+    } else {
+        console.log(`${locationName} already exists.`);
+    }
+}
+
+// Example usage
+addLocation('newLocation');  // This will add 'newLocation' to the 'location' object
+console.log(location);  // View the updated object
 
 add a choice options of where the player wants to start thier journey.*/
