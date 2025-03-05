@@ -42,11 +42,11 @@ let chara = {
     elixir: 100
 };
 let location = {
-    bar = false,
-    home = false,
-    hideout = false,
-    abandonedapt = false
-    arcanemarket = false
+    bar: false,
+    home: false,
+    hideout: false,
+    abandonedapt: false,
+    arcanemarket: false
 };
 
 switch(choiceFaction.toLowerCase(choiceFaction)) {
@@ -181,7 +181,7 @@ while (location.bar === true) {
                 return bartender++;
             } else if (bartender >= 1) {
                 console.log("Bartender has told you everything he knows about Soul Survivor, now he looks at you expectantly if you're going to get a drink.")
-            } else
+            }
         } else if (barChoice === 'drink') {
             drinking();
         } else if (barChoice === 'leave') {
