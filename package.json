@@ -1,5 +1,9 @@
 {
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "express": "^4.21.2",
+>>>>>>> 8e5276e528b9d4f20317e3e1ebb69f34d23f5a99
     "prompt-sync": "^4.2.0"
   }
 }
